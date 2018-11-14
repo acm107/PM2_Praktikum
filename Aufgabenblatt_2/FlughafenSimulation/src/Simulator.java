@@ -2,7 +2,7 @@
 public class Simulator {
 	
 	public static void main(String[] args) {
-		Flughafen flughafen = new Flughafen(4);
+		Flughafen flughafen = new Flughafen(3);
 		flughafen.start();
 		try {
 			

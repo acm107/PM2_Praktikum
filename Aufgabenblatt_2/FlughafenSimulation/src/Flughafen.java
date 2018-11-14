@@ -58,7 +58,6 @@ public class Flughafen extends Thread{
 			
 		}
 		
-
 		/*while(!flugzeuge.isEmpty()) {
 			Iterator<Flugzeug> it = flugzeuge.iterator();
 			it.next().start();

@@ -4,7 +4,7 @@ import java.util.Random;
 /**
  * @author Ehsan , Martin
  *
- */
+ */ 
 public class Flugzeug extends Thread{
 	private Flughafen flughafen;
 	private String id;				
