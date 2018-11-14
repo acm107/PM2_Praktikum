@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 import java.util.Random;
 
 /**
@@ -10,7 +11,7 @@ public class Flugzeug extends Thread{
 	private int flugdauer;
 	private int startzeit;
 	private Status status ;
-	public int zeit;
+	public int simTime; //zeit
 	
 	public Flugzeug(String id , int startTime, Flughafen flughafen) {
 		if(flughafen != null) {
@@ -21,12 +22,36 @@ public class Flugzeug extends Thread{
 		this.id = id;
 		this.startzeit = startTime;
 		this.status = Status.IM_FLUG;
+		this.simTime = 0;
 		
 	}
 	
 	@Override
-	public void run() {
+	public  void run() {
+		int LandingTime = 0; // in MilliSekunde	
 		System.out.println(id +" befindet sich jetzt im Flug. Zeit: "+ startzeit);
+		while (!isInterrupted()) {
+			switch (status) {
+			case IM_FLUG:
+				if(simTime - simTime < flugdauer) {
+					status = Status.IM_LANDING;
+					startzeit = simTime;
+					flugdauer = 1500;
+					System.out.println(id +" befindet sich jetzt im Landing. Zeit: "+ startzeit);
+				}
+				break;
+			case IM_LANDING:
+				if(simTime - simTime < flugdauer) {
+					flughafen.landen(this);
+					System.out.println(id +" ist gelandet. Zeit: "+ startzeit);
+					this.interrupt();
+				}
+
+			
+			}
+			
+		}
+
 			
 		
 	}
@@ -47,11 +72,8 @@ public class Flugzeug extends Thread{
 	
 	public void setZeit(int zeit) {
 		if(zeit >= 0) {
-			this.zeit = zeit;
+			this.simTime = zeit;
 		}else {throw new IllegalArgumentException();}
-	}
-	public Status getStatus() {
-		return status;
 	}
 //-------------------------Private Methode---------------------------
 	/*
