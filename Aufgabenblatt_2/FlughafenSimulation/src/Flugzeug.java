@@ -29,21 +29,21 @@ public class Flugzeug extends Thread{
 	@Override
 	public  void run() {
 		int LandingTime = 0; // in MilliSekunde	
-		System.out.println(id +" befindet sich jetzt im Flug. Zeit: "+ startzeit);
+		System.out.println(id +" befindet sich jetzt im Flug. START: "+ startzeit+", SIMTIME: "+simTime );
 		while (!isInterrupted()) {
 			switch (status) {
 			case IM_FLUG:
 				if(simTime - simTime < flugdauer) {
 					status = Status.IM_LANDING;
-					startzeit = simTime;
-					flugdauer = 1500;
-					System.out.println(id +" befindet sich jetzt im Landing. Zeit: "+ startzeit);
+					//startzeit = simTime;
+					//flugdauer = 1500;
+					System.out.println(id +" befindet sich jetzt im Landing. Zeit: "+ startzeit+", SIMTIME: "+simTime);
 				}
 				break;
 			case IM_LANDING:
 				if(simTime - simTime < flugdauer) {
 					flughafen.landen(this);
-					System.out.println(id +" ist gelandet. Zeit: "+ startzeit);
+					System.out.println(id +" ist gelandet. Zeit: "+ startzeit+", SIMTIME: "+simTime);
 					this.interrupt();
 				}
 

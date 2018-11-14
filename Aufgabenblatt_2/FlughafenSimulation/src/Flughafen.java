@@ -42,7 +42,7 @@ public class Flughafen extends Thread{
 		System.out.println("Simolation Startet:");
 		System.out.println(anzahlFlugzeuge + " Flugzeuge wollen auf unseren Spur landen!");
 		while(!isInterrupted() && index < anzahlFlugzeuge) {
-			flugzeuge.add(erzeugeFlugzeug(this,(int)(LocalTime.now().getSecond()*1000)));
+			flugzeuge.add(erzeugeFlugzeug(this,(int)(LocalTime.now().getNano()/1000)));
 			flugzeuge.get(index).start();
 			flugzeuge.get(index).setZeit(simTime);
 			while(!flugzeuge.get(index).gelandet()) {
@@ -67,7 +67,7 @@ public class Flughafen extends Thread{
 			}
 			it.remove();
 		}*/
-		System.out.println("Der Simulation dauert " + simTime/1000.0 +" sekunden vergangen" );
+		System.out.println("Der Simulation dauert " + (simTime)/1000 +" sekunden vergangen" );
 		
 		
 	}
